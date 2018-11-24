@@ -1,7 +1,7 @@
 # from .address import GroupAddress, GroupAddressType, PhysicalAddress
 # from .address_filter import AddressFilter
 from .telegram import Telegram, TelegramSetting, TelegramFunction, TelegramCommand, TeletaskConst, TelegramHeartbeat
-from .frame import Frame
+from .frame import Frame, FrameQueue
 # from .dpt import DPTBase, DPTBinary, DPTArray, DPTComparator, DPTWeekday
 # from .dpt_float import DPT2ByteFloat, DPT4ByteFloat, DPTLux, DPTTemperature, \
 #     DPTHumidity, DPTWsp, DPTElectricPotential, DPTElectricCurrent, DPTPower, \

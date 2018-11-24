@@ -93,7 +93,7 @@ class RemoteValue():
         """Send payload as telegram to Teletask bus."""
         function = TelegramFunction[self.doip_component]
         telegram = Telegram(command=TelegramCommand.GET, address=int(self.group_address), function=function)
-        #await self.teletask.telegrams.put(telegram)
+        await self.teletask.telegrams.put(telegram)
 
     async def send(self, response=False):
         """Send payload as telegram to Teletask bus."""
@@ -106,6 +106,7 @@ class RemoteValue():
         if not self.initialized:
             self.teletask.logger.info("Setting value of uninitialized device %s (value %s)", self.device_name, value)
             return
+        print("val", value)
         payload = self.to_teletask(value)
         updated = False
         if self.payload is None or payload != self.payload:

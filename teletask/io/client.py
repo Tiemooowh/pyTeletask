@@ -9,7 +9,7 @@ import binascii
 import time
 
 #from teletask.exceptions import CouldNotParseTeletaskIP, XTeletaskException
-from teletask.doip import Frame
+from teletask.doip import Frame, FrameQueue
 
 
 class Client:
@@ -76,18 +76,19 @@ class Client:
         """Parse and process Teletask frame. Callback for having received an TCP packet."""
         if raw:
             try:
-                frame = Frame(raw)
-                self.teletask.logger.info("Received: %s", frame.payload)
-                self.handle_teletaskframe(frame)
+                frame_queue = FrameQueue()
+                frames = frame_queue.process_frames(raw)
+                for frame in frames:
+                    self.teletask.logger.info("Received: %s", frame)
+                    self.handle_teletaskframe(frame)
+
             except Exception as ex:
                 self.teletask.logger.exception(ex)
 
     def handle_teletaskframe(self, frame):
         """Handle Frame and call all callbacks which watch for the service type ident."""
         handled = False
-        # print(self.callbacks)
         for callback in self.callbacks:
-            # print(type(callback))
             callback.callback(frame, self)
             handled = True
         if not handled:
@@ -123,7 +124,7 @@ class Client:
         """Send Frame to socket."""
         self.teletask.logger.info("Sending: %s", frame)
         self.writer.send(frame.to_teletask().encode())
-        # time.sleep(0.2)
+        #time.sleep(0.2)
 
     async def stop(self):
         """Stop TCP socket."""

@@ -1,5 +1,5 @@
 """
-TeletaskDoIPInterface manages Teletask/DoIP Tunneling or Routing connections.
+TeletaskDoIPInterface manages Teletask/DoIP connections.
 * It searches for available devices and connects with the corresponding connect method.
 * It passes Teletask telegrams from the network and
 * provides callbacks after having received a telegram from the network.
