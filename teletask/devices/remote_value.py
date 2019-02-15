@@ -15,7 +15,6 @@ class RemoteValue():
     def __init__(self,
                  teletask,
                  group_address=None,
-                 group_address_state=None,
                  device_name=None,
                  after_update_cb=None,
                  doip_component=None):
@@ -25,7 +24,7 @@ class RemoteValue():
 
         self.doip_component = doip_component
         self.group_address = group_address
-        self.group_address_state = group_address_state
+        self.brightness_val = 0
         self.after_update_cb = after_update_cb
         self.device_name = "Unknown" \
             if device_name is None else device_name
@@ -34,17 +33,14 @@ class RemoteValue():
     @property
     def initialized(self):
         """Evaluate if remote value is initialized with group address."""
-        return bool(self.group_address_state or self.group_address)
+        return bool(self.group_address)
 
     def has_group_address(self, group_address):
         """Test if device has given group address."""
-        return (self.group_address == group_address) or \
-               (self.group_address_state == group_address)
+        return (self.group_address == group_address)
 
     def state_addresses(self):
         """Return group addresses which should be requested to sync state."""
-        if self.group_address_state:
-            return [self.group_address_state, ]
         if self.group_address:
             return [self.group_address, ]
         return []
@@ -98,7 +94,14 @@ class RemoteValue():
     async def send(self, response=False):
         """Send payload as telegram to Teletask bus."""
         function = TelegramFunction[self.doip_component]
-        telegram = Telegram(command=TelegramCommand.SET, function=function,  address=int(self.group_address), setting=TelegramSetting.TOGGLE)
+        if self.doip_component == "DIMMER":
+            ttvalue = TeletaskValue()
+            ttvalue.value  = self.brightness_val
+            setting = ttvalue
+        else:
+            setting = TelegramSetting.TOGGLE
+
+        telegram = Telegram(command=TelegramCommand.SET, function=function,  address=int(self.group_address), setting=setting)
         await self.teletask.telegrams.put(telegram)
 
     async def set(self, value):
@@ -112,6 +115,10 @@ class RemoteValue():
         if self.payload is None or payload != self.payload:
             self.payload = payload
             updated = True
+
+        if value != None:
+            self.brightness_val  = value
+
         await self.send()
         if updated and self.after_update_cb is not None:
             await self.after_update_cb()
@@ -122,7 +129,7 @@ class RemoteValue():
             value = self.Value.ON
         else:
             value = self.Value.OFF
-        
+
         updated = False
         if self.payload is None or self.payload != value:
             self.payload = value
@@ -165,3 +172,7 @@ class RemoteValue():
             if key not in self.__dict__:
                 return False
         return True
+
+class TeletaskValue():
+    def __init__(self):
+        self.value = 0

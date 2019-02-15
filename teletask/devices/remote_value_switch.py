@@ -8,7 +8,7 @@ from .remote_value import RemoteValue
 
 
 class RemoteValueSwitch(RemoteValue):
-    
+
     class Value(Enum):
         """Enum for indicating the direction."""
 
@@ -18,7 +18,6 @@ class RemoteValueSwitch(RemoteValue):
     def __init__(self,
                  teletask,
                  group_address=None,
-                 group_address_state=None,
                  device_name=None,
                  after_update_cb=None,
                  doip_component=None,
@@ -26,14 +25,15 @@ class RemoteValueSwitch(RemoteValue):
         """Initialize remote value of Teletask """
         # pylint: disable=too-many-arguments
         super(RemoteValueSwitch, self).__init__(
-            teletask, group_address, group_address_state,
-            device_name=device_name, after_update_cb=after_update_cb, doip_component=doip_component)
+            teletask, group_address,
+            device_name=device_name, after_update_cb=after_update_cb,
+            doip_component=doip_component)
         self.invert = invert
 
     def to_teletask(self, value):
         """Convert value to payload."""
         return value
-    
+
     def from_teletask(self, value):
         """Convert current payload to value."""
         return value

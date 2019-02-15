@@ -2,10 +2,10 @@
 from setuptools import find_packages, setup
 
 REQUIRES = []
-VERSION = '0.0.1'
+VERSION = '0.1.0'
 
 setup(
-    name='teletask',
+    name='pyteletask',
     description='An Asynchronous Library for the Teletask protocol.',
     version=VERSION,
     # download_url='https://github.com/edisonn/teletask/archive/{}.zip'.format(VERSION),
