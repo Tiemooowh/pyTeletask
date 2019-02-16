@@ -25,8 +25,7 @@ class Switch(Device):
         self.Switch_state = False
         self.switch = RemoteValueSwitch(
             teletask,
-            group_address_switch,
-            group_address_switch_state,
+            group_address=group_address_switch,
             device_name=self.name,
             after_update_cb=self.after_update,
             doip_component=self.doip_component)
@@ -56,7 +55,7 @@ class Switch(Device):
 
     async def change_state(self,value):
         await self.switch.state(value)
-        
+
     async def current_state(self):
         await self.switch.current_state()
 
