@@ -41,7 +41,7 @@ class Light(Device):
             device_name=self.name,
             after_update_cb=self.after_update,
             range_from=0,
-            range_to=255,
+            range_to=100,
             doip_component="DIMMER")
 
         self.teletask.register_device(self)
