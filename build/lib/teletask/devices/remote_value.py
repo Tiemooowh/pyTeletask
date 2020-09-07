@@ -19,7 +19,6 @@ class RemoteValue():
                  after_update_cb=None,
                  doip_component=None):
         """Initialize RemoteValue class."""
-        # pylint: disable=too-many-arguments
         self.teletask = teletask
 
         self.doip_component = doip_component
@@ -91,7 +90,7 @@ class RemoteValue():
         telegram = Telegram(command=TelegramCommand.GET, address=int(self.group_address), function=function)
         await self.teletask.telegrams.put(telegram)
 
-    async def send(self, response=False):
+    async def send(self, receivedSetting=TelegramSetting.TOGGLE.value, response=False):
         """Send payload as telegram to Teletask bus."""
         function = TelegramFunction[self.doip_component]
         if self.doip_component == "DIMMER":
@@ -99,7 +98,9 @@ class RemoteValue():
             ttvalue.value  = self.brightness_val
             setting = ttvalue
         else:
-            setting = TelegramSetting.TOGGLE
+            ttvalue = TeletaskValue()
+            ttvalue.value = receivedSetting
+            setting = ttvalue
 
         telegram = Telegram(command=TelegramCommand.SET, function=function,  address=int(self.group_address), setting=setting)
         await self.teletask.telegrams.put(telegram)
@@ -109,7 +110,7 @@ class RemoteValue():
         if not self.initialized:
             self.teletask.logger.info("Setting value of uninitialized device %s (value %s)", self.device_name, value)
             return
-        print("val", value)
+
         payload = self.to_teletask(value)
         updated = False
         if self.payload is None or payload != self.payload:
@@ -119,7 +120,7 @@ class RemoteValue():
         if value != None:
             self.brightness_val  = value
 
-        await self.send()
+        await self.send(receivedSetting=value)
         if updated and self.after_update_cb is not None:
             await self.after_update_cb()
 

@@ -6,7 +6,9 @@ pyteletask.egg-info/dependency_links.txt
 pyteletask.egg-info/not-zip-safe
 pyteletask.egg-info/top_level.txt
 teletask/__init__.py
-teletask/teletask.py
+teletask/__version__.py
+teletask/client.py
+teletask/test.py
 teletask/core/__init__.py
 teletask/core/telegram_queue.py
 teletask/devices/__init__.py

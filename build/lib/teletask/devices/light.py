@@ -17,7 +17,6 @@ class Light(Device):
                  group_address_switch=None,
                  group_address_switch_state=None,
                  group_address_brightness=None,
-                 dimmer_address_switch=None,
                  doip_component="relay",
                  device_updated_cb=None):
         """Initialize Light class."""
@@ -35,10 +34,11 @@ class Light(Device):
             doip_component=self.doip_component)
 
 
+
         self.brightness = RemoteValueScaling(
             teletask,
             group_address=group_address_brightness,
-            device_name=self.name,
+            device_name=self.name + " Brightness",
             after_update_cb=self.after_update,
             range_from=0,
             range_to=100,

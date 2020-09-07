@@ -1,10 +1,10 @@
 Metadata-Version: 1.1
 Name: pyteletask
-Version: 0.1.2
+Version: 1.0.1
 Summary: An Asynchronous Library for the Teletask protocol.
 Home-page: UNKNOWN
 Author: Timothy DE MEY
-Author-email: hello@edisonn.io
+Author-email: timothy.demey@edisonn.io
 License: MIT
 Description: UNKNOWN
 Keywords: teletask ip teletaskdoip doip home automation

@@ -6,19 +6,16 @@ from teletask.doip import Telegram, TelegramFunction, TelegramCommand
 
 class FrameQueue:
     """Initialize Telegram class."""
-    
-    
+
+
     def __init__(self):
         """Initialize object."""
-
-        # self.teletask.logger.info("Received: %s", frame.payload)
-        #         self.handle_teletaskframe(frame)
 
 
     def process_frames(self,raw):
         full_packet = ','.join(str(x) for x in raw)
         r1 = re.findall(r"(2,9,16,([0-9]*,?){7})",full_packet)
-        
+
         result = []
         for packet in r1:
             frame = self.process_frame(packet[0])
@@ -38,7 +35,7 @@ class FrameQueue:
                 return frame
 
         except Exception as e:
-            print(e)    
+            print(e)
 
         return None
 
@@ -62,4 +59,4 @@ class Frame:
     def __str__(self):
         return '<{0} {1} {2} {3}/>' \
             .format(self.doip_component, self.group_address, \
-                    self.payload, self.state, self.event) 
+                    self.payload, self.state, self.event)

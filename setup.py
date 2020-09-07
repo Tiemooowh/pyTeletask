@@ -1,8 +1,8 @@
-"""Setup for teletask python package."""
+"""Setup for PyTeletask python package."""
 from setuptools import find_packages, setup
 
 REQUIRES = []
-VERSION = '0.1.2'
+VERSION = '1.0.1'
 
 setup(
     name='pyteletask',
@@ -11,7 +11,7 @@ setup(
     # download_url='https://github.com/edisonn/teletask/archive/{}.zip'.format(VERSION),
     # url='http://edisonn.io/teletask',
     author='Timothy DE MEY',
-    author_email='hello@edisonn.io',
+    author_email='timothy.demey@edisonn.io',
     license='MIT',
     classifiers=[
         'Development Status :: 3 - Alpha',

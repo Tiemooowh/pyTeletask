@@ -2,6 +2,7 @@
 Module for DoIP Telegrams.
 """
 from enum import Enum
+from teletask.exceptions import CouldNotParseTeletaskCommand
 
 class TeletaskConst(Enum):
     START = 2
@@ -38,7 +39,7 @@ class TelegramSetting(Enum):
 
 class Telegram:
     """Class for DoIP telegrams."""
-   
+
     def __init__(self,command=None,function=None,address=None,setting=None):
         """Initialize Telegram class."""
         self.start = TeletaskConst.START.value
@@ -54,16 +55,18 @@ class Telegram:
             self.payload[1] = function.value
             self.payload[2] = 0
             self.payload[3] = address
-        else:
+        elif(str(command) == "TelegramCommand.SET"):
             self.payload[0] = 1
             self.payload[1] = None
 
             if(function!=None):
               self.payload[1] = function.value
+        else:
+            raise CouldNotParseTeletaskCommand
 
         if(command!=None):
             self.command = command.value
-        
+
         if(setting!=None):
             self.payload[2] = 0
             self.payload[3] = address
@@ -72,6 +75,7 @@ class Telegram:
         self.checksum = 0
 
     def to_teletask(self):
+        print(str(self))
         return str(self)
 
     def __str__(self):
@@ -94,7 +98,7 @@ class Telegram:
             self.length = len(self.payload) + 3
         except Exception:
             self.length = 8
-        
+
 
     def calc_checksum(self):
         packet_sum = 0
@@ -107,7 +111,7 @@ class Telegram:
 
 class TelegramHeartbeat:
     """Class for DoIP telegrams."""
-   
+
     def __init__(self):
         """Initialize Telegram class."""
 

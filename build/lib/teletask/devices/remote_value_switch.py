@@ -5,15 +5,13 @@ DPT 1.001.
 from enum import Enum
 
 from .remote_value import RemoteValue
-
+from teletask.doip import TelegramSetting
 
 class RemoteValueSwitch(RemoteValue):
-
     class Value(Enum):
         """Enum for indicating the direction."""
-
         OFF = 0
-        ON = 1
+        ON = 255
 
     def __init__(self,
                  teletask,
@@ -23,7 +21,6 @@ class RemoteValueSwitch(RemoteValue):
                  doip_component=None,
                  invert=False):
         """Initialize remote value of Teletask """
-        # pylint: disable=too-many-arguments
         super(RemoteValueSwitch, self).__init__(
             teletask, group_address,
             device_name=device_name, after_update_cb=after_update_cb,
@@ -40,8 +37,8 @@ class RemoteValueSwitch(RemoteValue):
 
     async def off(self):
         """Set value to down."""
-        await self.set(self.Value.OFF)
+        await self.set(self.Value.OFF.value)
 
     async def on(self):
         """Set value to UP."""
-        await self.set(self.Value.ON)
+        await self.set(self.Value.ON.value)

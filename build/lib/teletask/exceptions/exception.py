@@ -30,6 +30,18 @@ class CouldNotParseTelegram(TeletaskException):
         return '<CouldNotParseTelegram description="{0}" {1}/>' \
             .format(self.description, self._format_parameter())
 
+class CouldNotParseTeletaskCommand(TeletaskException):
+    """Exception fails for wrong Teletask Command data."""
+
+    def __init__(self, description=""):
+        """Initialize CouldNotParseTeletaskCommand class."""
+        super(CouldNotParseTeletaskIP, self).__init__("Could not parse Teletask Command")
+        self.description = description
+
+    def __str__(self):
+        """Return object as readable string."""
+        return '<CouldNotParseTeletaskCommand description="{0}" />' \
+            .format(self.description)
 
 class CouldNotParseTeletaskIP(TeletaskException):
     """Exception falss for worong TeletaskIP data."""

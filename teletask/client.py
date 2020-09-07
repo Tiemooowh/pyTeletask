@@ -21,8 +21,8 @@ class Teletask:
                  config=None,
                  loop=None,
                  telegram_received_cb=None):
+
         """Initialize Teletask class."""
-        # pylint: disable=too-many-arguments
         self.devices = Devices()
         self.telegrams = asyncio.Queue()
         self.loop = loop or asyncio.get_event_loop()
@@ -58,7 +58,7 @@ class Teletask:
         self.teletaskip_interface = TeletaskDoIPInterface(self)
         await self.teletaskip_interface.start(host,port,True,60)
         await self.telegram_queue.start()
-        
+
 
         if daemon_mode:
             await self.loop_until_sigint()
@@ -119,7 +119,7 @@ class Teletask:
         self.registered_devices["FLAG"] = {}
         await self.telegrams.put(telegram)
         await asyncio.sleep(1)
-        
+
 
     def register_device(self, device):
         if device.doip_component in self.registered_devices:
