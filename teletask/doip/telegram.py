@@ -28,6 +28,7 @@ class TelegramFunction(Enum):
     AUDIO = 31
     PROCESS = 3
     REGIME = 14
+    TPKEY = 52
     SERVICE = 53
     MESSAGE = 54
     CONDITION = 60

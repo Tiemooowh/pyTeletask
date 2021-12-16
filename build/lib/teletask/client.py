@@ -120,6 +120,11 @@ class Teletask:
         await self.telegrams.put(telegram)
         await asyncio.sleep(1)
 
+        telegram = Telegram(command=TelegramCommand.LOG, function=TelegramFunction.TPKEY)
+        self.registered_devices["TPKEY"] = {}
+        await self.telegrams.put(telegram)
+        await asyncio.sleep(1)
+
 
     def register_device(self, device):
         if device.doip_component in self.registered_devices:
