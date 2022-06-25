@@ -40,7 +40,7 @@ class TelegramQueue():
         """Start telegram queue."""
         self.teletask.loop.create_task(self.run())
         asyncio.ensure_future(self.start_heartbeat())
-        
+
 
     async def start_heartbeat(self):
         # your infinite loop here, for example:
@@ -85,7 +85,7 @@ class TelegramQueue():
         try:
             if str(type(telegram)) == "<class 'teletask.doip.frame.Frame'>":
                 await self.process_telegram_incoming(telegram)
-            else: 
+            else:
                 await self.process_telegram_outgoing(telegram)
         except Exception as ex:
            self.teletask.logger.error("Error while processing telegram %s", ex)
@@ -106,7 +106,7 @@ class TelegramQueue():
                 ret = await telegram_received_cb.callback(telegram)
                 if ret:
                     processed = True
-        
+
     async def update_component_state(self, doip_component, group_address, state):
         doip_component_name = (TelegramFunction(doip_component).name)
 
@@ -116,4 +116,5 @@ class TelegramQueue():
                     remote = self.teletask.registered_devices[doip_component_name][str(group_address)]
                     await remote.change_state(state)
                 except:
-                    self.teletask.logger.warning("No TeletaskIP Callback not defined That was no valid number.  Try again...")
+                    self.teletask.logger.debug("Received an update from an Unknown or Unregistered component")
+                    self.teletask.logger.debug("Name: " + doip_component_name + ", Address: " + str(group_address) + ", State: " + state)
