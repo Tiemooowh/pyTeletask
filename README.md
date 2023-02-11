@@ -1,7 +1,7 @@
 # PyTeletask
 
-How to install
-==============
+# How to install
+
 Two standard ways: using pip or calling setup.py manually.
 With pip for Python 3 (http://www.pip-installer.org), simply do::
 
@@ -16,6 +16,10 @@ The other way: uncompress archive. Then calling setup.py directly boils down to:
 You can optionally add --user to install in your home.
 Please refer to distutils documentation for further details.
 
-Version 0.0.1
-=============
+# Version 0.0.1
+
 Initial release with basic functionality
+
+# Version 1.0.4
+
+Update with support for dimmer WITHOUT a seperate relay to turn a (dimmeable) light on/off.

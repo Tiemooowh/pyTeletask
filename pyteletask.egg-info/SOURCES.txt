@@ -14,8 +14,10 @@ teletask/core/telegram_queue.py
 teletask/devices/__init__.py
 teletask/devices/device.py
 teletask/devices/devices.py
+teletask/devices/dimmer.py
 teletask/devices/light.py
 teletask/devices/remote_value.py
+teletask/devices/remote_value_dimmer.py
 teletask/devices/remote_value_scaling.py
 teletask/devices/remote_value_switch.py
 teletask/devices/switch.py
