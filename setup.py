@@ -2,7 +2,7 @@
 from setuptools import find_packages, setup
 
 REQUIRES = []
-VERSION = '1.0.3'
+VERSION = '1.0.4'
 
 setup(
     name='pyteletask',
