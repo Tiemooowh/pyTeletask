@@ -8,6 +8,11 @@ from .remote_value import RemoteValue
 from teletask.doip import TelegramSetting
 
 class RemoteValueSwitch(RemoteValue):
+    class Value(Enum):
+        """Enum for indicating the direction."""
+        OFF = 0
+        ON = 255
+
     def __init__(self,
                  teletask,
                  group_address=None,
