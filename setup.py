@@ -2,14 +2,22 @@
 from setuptools import find_packages, setup
 
 REQUIRES = []
-VERSION = '1.0.4'
+
+THIS_DIRECTORY = path.abspath(path.dirname(__file__))
+with open(path.join(THIS_DIRECTORY, "README.md"), encoding="utf-8") as f:
+    LONG_DESCRIPTION = f.read()
+
+VERSION = {}
+# pylint: disable=exec-used
+with open(path.join(THIS_DIRECTORY, "teletask/__version__.py"), encoding="utf-8") as fp:
+    exec(fp.read(), VERSION)
 
 setup(
     name='pyteletask',
     description='An Asynchronous Library for the Teletask protocol.',
+    long_description=LONG_DESCRIPTION,
+    long_description_content_type="text/markdown",
     version=VERSION,
-    # download_url='https://github.com/edisonn/teletask/archive/{}.zip'.format(VERSION),
-    # url='http://edisonn.io/teletask',
     author='Timothy DE MEY',
     author_email='timothy.demey@edisonn.io',
     license='MIT',
@@ -24,6 +32,5 @@ setup(
     ],
     packages=find_packages(),
     install_requires=REQUIRES,
-    # python_requires=">=3.5.2",
     keywords='teletask ip teletaskdoip doip home automation',
     zip_safe=False)
