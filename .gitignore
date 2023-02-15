@@ -4,3 +4,4 @@ teletask.egg-info
 pyteletask.egg-info
 build
 dist
+.swp
