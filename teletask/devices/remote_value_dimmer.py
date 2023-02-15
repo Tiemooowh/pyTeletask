@@ -11,7 +11,7 @@ class RemoteValueDimmer(RemoteValue):
     class Value(Enum):
         """Enum for indicating the direction."""
         OFF = 0
-        ON = 100
+        ON = 255
 
     def __init__(self,
                  teletask,
