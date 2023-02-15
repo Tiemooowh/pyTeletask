@@ -23,3 +23,7 @@ Initial release with basic functionality
 # Version 1.0.4
 
 Update with support for dimmer WITHOUT a seperate relay to turn a (dimmeable) light on/off.
+
+# Version 1.0.5
+
+Bug fix
