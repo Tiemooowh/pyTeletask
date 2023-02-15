@@ -18,7 +18,7 @@ setup(
     description='An Asynchronous Library for the Teletask protocol.',
     long_description=LONG_DESCRIPTION,
     long_description_content_type="text/markdown",
-    version=VERSION,
+    version=VERSION["__version__"],
     author='Timothy DE MEY',
     author_email='timothy.demey@edisonn.io',
     license='MIT',
